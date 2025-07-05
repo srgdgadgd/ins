@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DataMega - Exclusive Data Deals</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --text: #1f2937;
+            --light-bg: #f9fafb;
+            --border: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            margin-bottom: 15px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .offer-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+        }
+        
+        .offer-title {
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .offer-desc {
+            margin-bottom: 20px;
+            color: #6b7280;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 25px 0;
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: 600;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+            margin: 10px auto 0;
+            border-radius: 3px;
+        }
+        
+        .data-plans {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .data-plan {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .data-plan:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .data-plan:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--primary);
+        }
+        
+        .plan-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            gap: 12px;
+        }
+        
+        .network-logo {
+            width: 44px;
+            height: 44px;
+            object-fit: contain;
+            border-radius: 50%;
+            padding: 5px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .data-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        
+        .data-price {
+            font-size: 18px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .data-price span {
+            font-size: 14px;
+            color: #6b7280;
+            text-decoration: line-through;
+            margin-left: 5px;
+        }
+        
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .buy-btn {
+            background: linear-gradient(to right, var(--accent), var(--accent-dark));
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s;
+            font-size: 15px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .buy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3);
+        }
+        
+        .buy-btn .btn-text {
+            transition: all 0.3s;
+        }
+        
+        .buy-btn .icon {
+            font-size: 18px;
+        }
+        
+        .buy-btn.loading .btn-text {
+            opacity: 0;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .feature {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+        
+        .feature:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+        
+        .feature h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+        
+        .feature-icon {
+            width: 32px;
+            height: 32px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 18px;
+        }
+        
+        .feature p {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+        
+        .register-cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 12px;
+            margin-top: 30px;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .register-cta:before {
+            content: "";
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .register-cta:after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .register-cta h2 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .register-cta p {
+            font-size: 15px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .register-btn {
+            background-color: white;
+            color: var(--primary);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #6b7280;
+            margin-top: 40px;
+            font-size: 13px;
+        }
+        
+        /* Loading Overlay */
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        
+        .loading-spinner {
+            position: relative;
+            width: 80px;
+            height: 80px;
+        }
+        
+        .loading-spinner div {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border: 8px solid transparent;
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        .loading-spinner div:nth-child(2) {
+            border: 8px solid transparent;
+            border-bottom-color: var(--primary);
+            animation: spin2 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes spin2 {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(-360deg); }
+        }
+        
+        .loading-text {
+            margin-top: 20px;
+            color: white;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        /* Popup Styles */
+        #popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        #popup-box {
+            background-color: white;
+            color: var(--text);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: slideUp 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        #popup-box:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+        }
+        
+        #popup-box h2 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        
+        #popup-box p {
+            color: #6b7280;
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+        
+        .popup-button {
+            margin-top: 15px;
+            padding: 12px 25px;
+            font-size: 16px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .popup-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #9ca3af;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .popup-close:hover {
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        /* Notification System */
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 100%;
+            width: 350px;
+            padding: 0 15px;
+        }
+        
+        .notification {
+            background: white;
+            border-radius: 10px;
+            padding: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary);
+            transform: translateX(400px);
+            opacity: 0;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .notification.fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateX(0); }
+            to { opacity: 0; transform: translateX(400px); }
+        }
+        
+        .notification-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .notification-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            color: var(--primary);
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .notification-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text);
+        }
+        
+        .notification-time {
+            font-size: 12px;
+            color: #9ca3af;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+        
+        .notification-message {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.5;
+        }
+        
+        .notification-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0,0,0,0.05);
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9ca3af;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .notification-close:hover {
+            background: rgba(0,0,0,0.1);
+            color: var(--primary);
+        }
+        
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 3px;
+            width: 100%;
+            background: rgba(37, 99, 235, 0.1);
+        }
+        
+        .progress-bar-fill {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            transform-origin: left;
+            animation: progressBar 5s linear forwards;
+        }
+        
+        @keyframes progressBar {
+            from { transform: scaleX(1); }
+            to { transform: scaleX(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .data-plans {
+                grid-template-columns: 1fr;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .notification-container {
+                width: 100%;
+                padding: 0 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        
+        <div class="offer-section">
+            <h2 class="offer-title">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 12V22H4V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M22 7H2V12H22V7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 22V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 7H7.5C6.83696 7 6.20107 6.73661 5.73223 6.26777C5.26339 5.79893 5 5.16304 5 4.5C5 3.83696 5.26339 3.20107 5.73223 2.73223C6.20107 2.26339 6.83696 2 7.5 2C11 2 12 7 12 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 7H16.5C17.163 7 17.7989 6.73661 18.2678 6.26777C18.7366 5.79893 19 5.16304 19 4.5C19 3.83696 18.7366 3.20107 18.2678 2.73223C17.7989 2.26339 17.163 2 16.5 2C13 2 12 7 12 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Daily Login Rewards + Bonus Data</span>
+            </h2>
+            <p class="offer-desc">Complete your subscription to unlock these exclusive data bundle offers at unbeatable prices.</p>
+            
+            <h3 class="section-title">MTN Super Data Bundles</h3>
+            <div class="data-plans">
+                <div class="data-plan">
+                    <div class="badge">HOT DEAL</div>
+                    <div class="plan-header">
+                        <img src="https://images.seeklogo.com/logo-png/9/1/mtn-logo-png_seeklogo-95716.png" alt="MTN" class="network-logo">
+                        <div class="data-amount">75GB</div>
+                    </div>
+                    <div class="data-price">₦100 <span>₦2,500</span></div>
+                    <button class="buy-btn" onclick="claimOffer(event, 'MTN', '75GB')">
+                        <span class="btn-text">GET THIS OFFER</span>
+                        <span class="icon">→</span>
+                    </button>
+                </div>
+                
+                <div class="data-plan">
+                    <div class="plan-header">
+                        <img src="https://images.seeklogo.com/logo-png/9/1/mtn-logo-png_seeklogo-95716.png" alt="MTN" class="network-logo">
+                        <div class="data-amount">150GB</div>
+                    </div>
+                    <div class="data-price">₦200 <span>₦5,000</span></div>
+                    <button class="buy-btn" onclick="claimOffer(event, 'MTN', '150GB')">
+                        <span class="btn-text">GET THIS OFFER</span>
+                        <span class="icon">→</span>
+                    </button>
+                </div>
+            </div>
+            
+            <h3 class="section-title">Airtel Mega Data Bundles</h3>
+            <div class="data-plans">
+                <div class="data-plan">
+                    <div class="badge">POPULAR</div>
+                    <div class="plan-header">
+                        <img src="https://images.seeklogo.com/logo-png/28/1/airtel-logo-png_seeklogo-289636.png" alt="Airtel" class="network-logo">
+                        <div class="data-amount">50GB</div>
+                    </div>
+                    <div class="data-price">₦100 <span>₦1,800</span></div>
+                    <button class="buy-btn" onclick="claimOffer(event, 'Airtel', '50GB')">
+                        <span class="btn-text">GET THIS OFFER</span>
+                        <span class="icon">→</span>
+                    </button>
+                </div>
+                
+                <div class="data-plan">
+                    <div class="plan-header">
+                        <img src="https://images.seeklogo.com/logo-png/28/1/airtel-logo-png_seeklogo-289636.png" alt="Airtel" class="network-logo">
+                        <div class="data-amount">100GB</div>
+                    </div>
+                    <div class="data-price">₦180 <span>₦3,500</span></div>
+                    <button class="buy-btn" onclick="claimOffer(event, 'Airtel', '100GB')">
+                        <span class="btn-text">GET THIS OFFER</span>
+                        <span class="icon">→</span>
+                    </button>
+                </div>
+            </div>
+            
+            <h3 class="section-title">Glo Unlimited Data</h3>
+            <div class="data-plans">
+                <div class="data-plan">
+                    <div class="badge">BEST VALUE</div>
+                    <div class="plan-header">
+                        <img src="https://images.seeklogo.com/logo-png/49/1/glo-limited-logo-png_seeklogo-491131.png" alt="Glo" class="network-logo">
+                        <div class="data-amount">90GB</div>
+                    </div>
+                    <div class="data-price">₦150 <span>₦2,800</span></div>
+                    <button class="buy-btn" onclick="claimOffer(event, 'Glo', '90GB')">
+                        <span class="btn-text">GET THIS OFFER</span>
+                        <span class="icon">→</span>
+                    </button>
+                </div>
+                
+                <div class="data-plan">
+                    <div class="plan-header">
+                        <img src="https://images.seeklogo.com/logo-png/49/1/glo-limited-logo-png_seeklogo-491131.png" alt="Glo" class="network-logo">
+                        <div class="data-amount">200GB</div>
+                    </div>
+                    <div class="data-price">₦250 <span>₦6,000</span></div>
+                    <button class="buy-btn" onclick="claimOffer(event, 'Glo', '200GB')">
+                        <span class="btn-text">GET THIS OFFER</span>
+                        <span class="icon">→</span>
+                    </button>
+                </div>
+            </div>
+            
+            <p style="margin-top: 20px; text-align: center; font-size: 14px; color: #6b7280;">
+                Limited time offer. Prices shown include all bonuses and discounts.
+            </p>
+        </div>
+        
+        <div class="features">
+        
+            
+            <div class="feature">
+                <h3><span class="feature-icon">📶</span> Network Coverage</h3>
+                <p>Works nationwide with strong 4G/LTE coverage in all major cities and towns.</p>
+            </div>
+            
+            <div class="feature">
+                <h3><span class="feature-icon">🔄</span> Rollover Data</h3>
+                <p>Unused data rolls over to the next month when you renew before expiration.</p>
+            </div>
+        </div>
+        
+        <div class="register-cta">
+            <h2>Ready for Unlimited Data?</h2>
+            <p>Join thousands of satisfied customers enjoying our exclusive data deals. Subscribe now to get started!</p>
+            <button class="register-btn" onclick="showRegisterPopup()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8.5 11C10.7091 11 12.5 9.20914 12.5 7C12.5 4.79086 10.7091 3 8.5 3C6.29086 3 4.5 4.79086 4.5 7C4.5 9.20914 6.29086 11 8.5 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M17 11L19 13L23 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                SUBSCRIBE NOW
+            </button>
+        </div>
+        
+        <footer>
+            <p>© 2023 DataMega. All rights reserved.</p>
+            <p>DataMega is not affiliated with any network provider. All trademarks are property of their respective owners.</p>
+        </footer>
+    </div>
+    
+    <!-- Notification Container -->
+    <div class="notification-container" id="notification-container"></div>
+    
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="loading-spinner">
+            <div></div>
+            <div></div>
+        </div>
+        <div class="loading-text">Preparing your exclusive offer...</div>
+    </div>
+    
+    <!-- Popup Overlay -->
+    <div id="popup-overlay">
+        <div id="popup-box">
+            <button class="popup-close" onclick="closePopup()">×</button>
+            <h2 id="popup-title">🎉 Your Data Bundle Is Reserved!</h2>
+            <p id="popup-message">Complete your subscription now to activate your exclusive data bundle offer.</p>
+            <button class="popup-button" id="popup-action-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 8V16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                CONTINUE TO SUBSCRIPTION
+            </button>
+        </div>
+    </div>
+    
+    <script>
+        // Notification data
+        const names = ["James", "Amina", "Chukwu", "Bola", "Yusuf", "Ngozi", "Emeka", "Fatima"];
+        const locations = ["Lagos", "Abuja", "Port Harcourt", "Kano", "Enugu", "Ibadan", "Aba", "Benin"];
+        const dataAmounts = ["50GB", "75GB", "100GB", "150GB", "200GB", "300GB"];
+        const actions = ["subscribed to", "purchased", "activated", "claimed", "got"];
+        const times = ["just now", "1 min ago", "2 mins ago", "3 mins ago", "5 mins ago"];
+        const icons = ["🎉", "💰", "🏆", "🔥", "💎", "🚀"];
+        
+        // Create a notification
+        function createNotification() {
+            const name = names[Math.floor(Math.random() * names.length)];
+            const location = locations[Math.floor(Math.random() * locations.length)];
+            const data = dataAmounts[Math.floor(Math.random() * dataAmounts.length)];
+            const action = actions[Math.floor(Math.random() * actions.length)];
+            const time = times[Math.floor(Math.random() * times.length)];
+            const icon = icons[Math.floor(Math.random() * icons.length)];
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <div class="notification-header">
+                    <div class="notification-icon">${icon}</div>
+                    <div class="notification-title">New Subscription</div>
+                    <div class="notification-time">${time}</div>
+                </div>
+                <div class="notification-message">${name} from ${location} ${action} ${data} data bundle</div>
+                <button class="notification-close">&times;</button>
+                <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+            `;
+            
+            return notification;
+        }
+        
+        // Show notification
+        function showNotification() {
+            const container = document.getElementById('notification-container');
+            const notification = createNotification();
+            
+            container.appendChild(notification);
+            
+            // Trigger animation
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 10);
+            
+            // Close button
+            notification.querySelector('.notification-close').addEventListener('click', () => {
+                notification.classList.add('fade-out');
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            });
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                notification.classList.add('fade-out');
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, 5000);
+        }
+        
+        // Start showing notifications
+        function startNotifications() {
+            // First notification after 2 seconds
+            setTimeout(showNotification, 2000);
+            
+            // Subsequent notifications every 6-10 seconds
+            setInterval(() => {
+                showNotification();
+            }, 6000 + Math.random() * 4000);
+        }
+        
+        // Show loading overlay
+        function showLoading() {
+            document.getElementById('loading-overlay').style.display = 'flex';
+        }
+        
+        // Hide loading overlay
+        function hideLoading() {
+            document.getElementById('loading-overlay').style.display = 'none';
+        }
+        
+        // Show popup
+        function showPopup(title, message, buttonText, actionUrl) {
+            document.getElementById('popup-title').textContent = title;
+            document.getElementById('popup-message').textContent = message;
+            document.getElementById('popup-action-btn').textContent = buttonText;
+            
+            const actionBtn = document.getElementById('popup-action-btn');
+            actionBtn.onclick = function() {
+                window.location.href = actionUrl;
+            };
+            
+            document.getElementById('popup-overlay').style.display = 'flex';
+        }
+        
+        // Close popup
+        function closePopup() {
+            document.getElementById('popup-overlay').style.display = 'none';
+        }
+        
+        // Claim offer function
+        function claimOffer(event, network, amount) {
+            event.preventDefault();
+            const button = event.currentTarget;
+            
+            // Show loading
+            showLoading();
+            
+            // Simulate processing delay
+            setTimeout(() => {
+                hideLoading();
+                
+                // Show appropriate popup based on network
+                if (network === 'MTN') {
+                    showPopup(
+                        `🎉 Your ${amount} MTN Bundle Is Ready!`, 
+                        `Complete your subscription now to activate your ${amount} MTN data bundle at this exclusive price.`,
+                        "GET MTN BUNDLE NOW",
+                        "https://datamega.ng/mtn-subscribe"
+                    );
+                } else if (network === 'Airtel') {
+                    showPopup(
+                        `🔥 ${amount} Airtel Data Reserved!`, 
+                        `Don't miss this limited-time offer! Subscribe now to get your ${amount} Airtel data bundle.`,
+                        "GET AIRTEL DATA NOW",
+                        "https://datamega.ng/airtel-subscribe"
+                    );
+                } else if (network === 'Glo') {
+                    showPopup(
+                        `🚀 ${amount} Glo Data Activated!`, 
+                        `Your ${amount} Glo data bundle is waiting! Complete your subscription to start using it immediately.`,
+                        "GET GLO DATA NOW",
+                        "https://datamega.ng/glo-subscribe"
+                    );
+                }
+            }, 1500);
+        }
+        
+        // Register button click
+        function showRegisterPopup() {
+            showPopup(
+                "🌟 Welcome to DataMega!", 
+                "Create an account to access all our exclusive data deals and manage your subscriptions easily.",
+                "CREATE ACCOUNT NOW",
+                "https://datamega.ng/register"
+            );
+        }
+        
+        // Close popup when clicking outside
+        document.getElementById('popup-overlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+        
+        // Start notifications when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            startNotifications();
+        });
+    </script>
+</body>
+</html>
